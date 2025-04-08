@@ -19,12 +19,12 @@ public class GteController : Controller {
 
   [HttpGet("pisos")]
   public IActionResult Pisos(){
-    // 2. Muestra todos los registros con 4 o más pisos
+    // 2. Muestra todos los registros con 3 o más pisos
     MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
     var db = client.GetDatabase("Inmuebles");
     var collection = db.GetCollection<Inmueble>("RentasVentas");
 
-    var filtro = Builders<Inmueble>.Filter.Gte(x => x.Pisos, 4);
+    var filtro = Builders<Inmueble>.Filter.Gte(x => x.Pisos, 3);
     var lista = collection.Find(filtro).ToList();
     return Ok(lista);
   }
